@@ -135,8 +135,17 @@ require('lazy').setup({
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
+    -- config = function()
+    --   vim.cmd.colorscheme 'onedark'
+    -- end,
+  },
+
+  { 
+    "catppuccin/nvim", 
+    name = "catppuccin", 
+    priority = 1000, 
     config = function()
-      vim.cmd.colorscheme 'onedark'
+      vim.cmd.colorscheme 'catppuccin-mocha'
     end,
   },
 
@@ -147,7 +156,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'catppuccin-mocha',
         component_separators = '|',
         section_separators = '',
       },
@@ -198,6 +207,11 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  'simrat39/rust-tools.nvim',
+  'nvim-lua/plenary.nvim',
+  'mfussenegger/nvim-dap',
+
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -222,6 +236,7 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -435,12 +450,29 @@ end
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
+  clangd = {},
+  gopls = {},
+  pyright = {},
+  rust_analyzer = {},
+  -- rust_analyzer = {
+  --           filetypes = { 'rust' },
+  --           imports = {
+  --               granularity = {
+  --                   group = "module",
+  --               },
+  --               prefix = "self",
+  --           },
+  --           cargo = {
+  --               buildScripts = {
+  --                   enable = true,
+  --               },
+  --           },
+  --           procMacro = {
+  --               enable = true
+  --           },
+  -- },
   -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
     Lua = {
