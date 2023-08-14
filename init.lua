@@ -457,6 +457,13 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  vim.cmd[[
+    augroup AutoCmds
+      autocmd!
+      autocmd BufWritePost * :Format
+    augroup END
+  ]]
 end
 
 -- Enable the following language servers
@@ -472,23 +479,6 @@ local servers = {
   gopls = {},
   pyright = {},
   rust_analyzer = {},
-  -- rust_analyzer = {
-  --           filetypes = { 'rust' },
-  --           imports = {
-  --               granularity = {
-  --                   group = "module",
-  --               },
-  --               prefix = "self",
-  --           },
-  --           cargo = {
-  --               buildScripts = {
-  --                   enable = true,
-  --               },
-  --           },
-  --           procMacro = {
-  --               enable = true
-  --           },
-  -- },
   -- tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
 
