@@ -156,10 +156,16 @@ require('lazy').setup({
     -- See `:help lualine.txt`
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = 'catppuccin-mocha',
         component_separators = '|',
         section_separators = '',
+      },
+    sections = {
+        lualine_c = {{  'filename', file_status=true, path=2 }},
+      },
+    inactive_sections = {
+        lualine_c = {{  'filename', file_status=true, path=2 }},
       },
     },
   },
