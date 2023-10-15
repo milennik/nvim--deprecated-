@@ -110,7 +110,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim',                opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -161,28 +161,29 @@ require('lazy').setup({
         component_separators = '|',
         section_separators = '',
       },
-    sections = {
-        lualine_c = {{  'filename', file_status=true, path=2 }},
+      sections = {
+        lualine_c = { { 'filename', file_status = true, path = 2 } },
       },
-    inactive_sections = {
-        lualine_c = {{  'filename', file_status=true, path=2 }},
+      inactive_sections = {
+        lualine_c = { { 'filename', file_status = true, path = 2 } },
       },
     },
   },
 
-  {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
-    opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
-    },
-  },
+  -- {
+  --   -- Add indentation guides even on blank lines
+  --   'lukas-reineke/indent-blankline.nvim',
+  --   -- Enable `lukas-reineke/indent-blankline.nvim`
+  --   -- See `:help indent_blankline.txt`
+  --   opts = {
+  --     char = '┊',
+  --     show_trailing_blankline_indent = false,
+  --   },
+  -- },
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',               opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -227,8 +228,14 @@ require('lazy').setup({
     end
   },
 
-  -- Autoclose 
+  -- Autoclose
   'm4xshen/autoclose.nvim',
+
+  -- treesitter context
+  'nvim-treesitter/nvim-treesitter-context',
+
+  --Nvim tree
+  'nvim-tree/nvim-tree.lua'
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -287,6 +294,13 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -310,6 +324,24 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Setup autoclose plugin
 require("autoclose").setup()
+-- Setup nvimtree
+require("nvim-tree").setup {}
+
+-- Setup treesitter context
+require("treesitter-context").setup {
+  enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
+  max_lines = 2,            -- How many lines the window should span. Values <= 0 mean no limit.
+  min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+  line_numbers = true,
+  multiline_threshold = 20, -- Maximum number of lines to show for a single context
+  trim_scope = 'outer',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+  mode = 'cursor',          -- Line used to calculate context. Choices: 'cursor', 'topline'
+  -- Separator between context and content. Should be a single character string, like '-'.
+  -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+  separator = nil,
+  zindex = 20,     -- The Z-index of the context window
+  on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+}
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
@@ -464,7 +496,7 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 
-  vim.cmd[[
+  vim.cmd [[
     augroup AutoCmds
       autocmd!
       autocmd BufWritePost * :Format
