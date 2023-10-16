@@ -460,7 +460,8 @@ vim.keymap.set('n', '<leader>ha', ':lua require("harpoon.mark").add_file()<cr>',
 vim.keymap.set('n', '<leader>hs', ':lua require("harpoon.ui").toggle_quick_menu()<cr>', { desc = 'Show harpoon menu' })
 vim.keymap.set('n', '!', ':lua require("harpoon.ui").nav_file(1)<cr>', { desc = 'Jump to file 1' })
 vim.keymap.set('n', '@', ':lua require("harpoon.ui").nav_file(2)<cr>', { desc = 'Jump to file 2' })
--- vim.keymap.set('n', '<C-#>', ':lua require("harpoon.ui").nav_file(3)<cr>', { desc = 'Jump to file 3' })
+vim.keymap.set('n', '!!', ':lua require("harpoon.ui").nav_file(3)<cr>', { desc = 'Jump to file 3' })
+vim.keymap.set('n', '@@', ':lua require("harpoon.ui").nav_file(4)<cr>', { desc = 'Jump to file 4' })
 
 
 -- [[ Configure LSP ]]
