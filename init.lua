@@ -164,8 +164,8 @@ require('lazy').setup({
       sections = {
         lualine_c = { { 'filename', file_status = true, path = 2 } },
       },
-    inactive_sections = {
-        lualine_c = {{  'filename', file_status=true, path = 2 }},
+      inactive_sections = {
+        lualine_c = { { 'filename', file_status = true, path = 2 } },
       },
     },
   },
@@ -458,10 +458,10 @@ vim.keymap.set('n', '<C-e>', ':HopWord<cr>', { desc = 'Hop to any word' })
 -- Map Harpoon
 vim.keymap.set('n', '<leader>ha', ':lua require("harpoon.mark").add_file()<cr>', { desc = 'Add file to the harpoon' })
 vim.keymap.set('n', '<leader>hs', ':lua require("harpoon.ui").toggle_quick_menu()<cr>', { desc = 'Show harpoon menu' })
-vim.keymap.set('n', '!', ':lua require("harpoon.ui").nav_file(1)<cr>', { desc = 'Jump to file 1' })
-vim.keymap.set('n', '@', ':lua require("harpoon.ui").nav_file(2)<cr>', { desc = 'Jump to file 2' })
-vim.keymap.set('n', '!!', ':lua require("harpoon.ui").nav_file(3)<cr>', { desc = 'Jump to file 3' })
-vim.keymap.set('n', '@@', ':lua require("harpoon.ui").nav_file(4)<cr>', { desc = 'Jump to file 4' })
+vim.keymap.set('n', '<F1>', ':lua require("harpoon.ui").nav_file(1)<cr>', { desc = 'Jump to file 1' })
+vim.keymap.set('n', '<F2>', ':lua require("harpoon.ui").nav_file(2)<cr>', { desc = 'Jump to file 2' })
+vim.keymap.set('n', '<F3>', ':lua require("harpoon.ui").nav_file(3)<cr>', { desc = 'Jump to file 3' })
+vim.keymap.set('n', '<F4>', ':lua require("harpoon.ui").nav_file(4)<cr>', { desc = 'Jump to file 4' })
 
 
 -- [[ Configure LSP ]]
